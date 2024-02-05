@@ -1,5 +1,5 @@
 #include<stdio.h>
-void bubble_sort(int a[],int c){
+void insertion_sort(int a[],int c){
     for(int i=1;i<c;i++){
         int key=a[i];
         int j=i-1;
@@ -13,7 +13,7 @@ void bubble_sort(int a[],int c){
 int main(){
     int a[]={32,23,75,93,35,65};
     int c=sizeof(a)/sizeof(a[0]);
-    bubble_sort(a,c);
+    insertion_sort(a,c);
     for(int i=0;i<c;i++){
         printf("%d ", a[i]);   
     }
