@@ -10,7 +10,7 @@ int cutRod(int price[], int index, int n) {
         return n * price[0];
     }
     int notCut = cutRod(price, index - 1, n);
-    int cut = INT_MIN;
+    int cut = 0;
     int rod_length = index + 1;
     if (rod_length <= n) {
         cut = price[index] + cutRod(price, index, n - rod_length);
