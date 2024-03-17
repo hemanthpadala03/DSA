@@ -95,6 +95,18 @@ Node* insertAfter(Node* head, Node* prevNode, int data) {
     return head;
 }
 
+// Function to delete a node after a specific node
+Node* deleteAfter(Node* head, Node* prevNode) {
+    if (prevNode == NULL || prevNode->next == NULL) {
+        printf("Invalid operation: prevNode is NULL or prevNode is the last node\n");
+        return head;
+    }
+    Node* nodeToDelete = prevNode->next;
+    prevNode->next = nodeToDelete->next;
+    free(nodeToDelete);
+    return head;
+}
+
 int main() {
     Node* head = NULL;
     head = insertAtBeginning(head, 1);
@@ -110,6 +122,5 @@ int main() {
     Node* prevNode = head; // The first node in the list
     head = insertAfter(head, prevNode, 5);
     traverse(head);
-
     return 0;
 }
