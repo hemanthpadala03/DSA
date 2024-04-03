@@ -44,6 +44,60 @@ void insertAfter(struct Node* prevNode, int newData) {
     prevNode->next = newNode;
 }
 
+// Function to delete the first node
+void deleteAtBeginning(struct Node** head) {
+    if (*head == NULL) {
+        return; // List is empty
+    }
+
+    struct Node* temp = *head;
+    *head = (*head)->next;
+    free(temp);
+}
+
+// Function to delete the last node
+void deleteAtEnd(struct Node** head) {
+    if (*head == NULL) {
+        return; // List is empty
+    }
+
+    if ((*head)->next == NULL) {
+        free(*head);
+        *head = NULL;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next->next != NULL) {
+        current = current->next;
+    }
+    free(current->next);
+    current->next = NULL;
+}
+
+// Function to delete a node by value
+void deleteByValue(struct Node** head, int targetData) {
+    if (*head == NULL) {
+        return; // List is empty
+    }
+
+    if ((*head)->data == targetData) {
+        deleteAtBeginning(head);
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL && current->next->data != targetData) {
+        current = current->next;
+    }
+
+    if (current->next != NULL) {
+        struct Node* temp = current->next;
+        current->next = current->next->next;
+        free(temp);
+    }
+}
+
 // Function to print the linked list
 void printList(struct Node* head) {
     struct Node* current = head;
@@ -73,6 +127,15 @@ int main() {
 
     // Print the updated list
     printf("Updated Linked List: ");
+    printList(head);
+
+    // Delete nodes
+    deleteAtBeginning(&head);
+    deleteAtEnd(&head);
+    deleteByValue(&head, 25);
+
+    // Print the final list
+    printf("Final Linked List: ");
     printList(head);
 
     // Clean up memory (free nodes)
